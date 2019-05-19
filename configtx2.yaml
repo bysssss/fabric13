@@ -50,9 +50,11 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *PeerOrg1
+                    - *PeerOrg2
     FabtestChannel:
         Consortium: SampleConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *PeerOrg1
+                - *PeerOrg2
