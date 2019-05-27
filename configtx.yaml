@@ -1,0 +1,60 @@
+# Copyright bysssss Corp. All Rights Reserved.
+
+---
+Organizations:
+    - &OrdererOrg
+        Name: Orderer13
+        ID: OrdererMSP13
+        MSPDir: crypto-config/ordererOrganizations/fabtest13.com/msp
+
+    - &PeerOrg1
+        Name: Samsung
+        ID: SamsungMSP
+        MSPDir: crypto-config/peerOrganizations/samsung1.fabtest13.com/msp
+        AnchorPeers:
+            - Host: 172.21.106.163
+              Port: 7051
+
+    - &PeerOrg2
+        Name: Hyundai
+        ID: HyundaiMSP
+        MSPDir: crypto-config/peerOrganizations/hyundai2.fabtest13.com/msp
+        AnchorPeers:
+            - Host: 172.21.106.163
+              Port: 27051
+
+Application: &ApplicationDefaults
+    Organizations:
+
+Orderer: &OrdererDefaults
+    OrdererType: solo
+    Addresses:
+        - 172.21.106.163:7050
+    BatchTimeout: 2s
+    BatchSize:
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 99 MB
+        PreferredMaxBytes: 512 KB
+    Kafka:
+        Brokers:
+            - 127.0.0.1:9092
+    Organizations:
+
+Profiles:
+    FabtestGenesis:
+        Orderer:
+            <<: *OrdererDefaults
+            Organizations:
+                - *OrdererOrg
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *PeerOrg1
+                    - *PeerOrg2
+    FabtestChannel:
+        Consortium: SampleConsortium
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *PeerOrg1
+                - *PeerOrg2

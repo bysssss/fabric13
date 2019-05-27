@@ -1,0 +1,29 @@
+# Copyright bysssss Corp. All Rights Reserved.
+
+# Template : 구성할 해당 node의 갯수.
+# Users : 각 node의 사용자계정 갯수.
+
+OrdererOrgs:
+  - Name: Orderer
+    Domain: fabtest13.com
+    Specs:
+      - Hostname: orderer
+    Template:
+      Count: 3
+
+PeerOrgs:
+  - Name: Samsung1
+    Domain: samsung1.fabtest13.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+    Users:
+      Count: 1
+
+  - Name: Hyundai2
+    Domain: hyundai2.fabtest13.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+    Users:
+      Count: 1
