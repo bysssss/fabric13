@@ -44,7 +44,7 @@ services:
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb1:5984
       - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
-    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
       - 7051:7051
@@ -52,7 +52,7 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ./configtx/:/etc/hyperledger/configtx
-	- ./crypto-config/peerOrganizations/samsung1.fabtest13.com/peers/peer0.samsung1.fabtest13.com/:/etc/hyperledger/crypto-config/samsung1
+        - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/peers/peer0.samsung1.fabtest13.com/:/etc/hyperledger/crypto-config/samsung1
         - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/users:/etc/hyperledger/crypto-config/samsungusers
     depends_on:
       - orderer.fabtest13.com
