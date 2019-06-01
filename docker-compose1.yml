@@ -15,16 +15,18 @@ services:
       - ORDERER_GENERAL_GENESISMETHOD=file
       - ORDERER_GENERAL_GENESISFILE=/etc/hyperledger/configtx/genesis.block
       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP13
-      - ORDERER_GENERAL_LOCALMSPDIR=/etc/hyperledger/crypto-config/orderer/msp
+      #- ORDERER_GENERAL_LOCALMSPDIR=/etc/hyperledger/crypto-config/orderer/msp
+      - ORDERER_GENERAL_LOCALMSPDIR=/etc/hyperledger/crypto-config/orderer0/msp
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
     command: orderer
     ports:
       - 7050:7050
     volumes:
         - ./configtx/:/etc/hyperledger/configtx
-        - ./crypto-config/ordererOrganizations/fabtest13.com/orderers/orderer.fabtest13.com/:/etc/hyperledger/crypto-config/orderer
-        - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/peers/peer0.samsung1.fabtest13.com/:/etc/hyperledger/crypto-config/samsung1
-        - ./crypto-config/peerOrganizations/hyundai2.fabtest13.com/peers/peer0.hyundai2.fabtest13.com/:/etc/hyperledger/crypto-config/hyundai2
+        #- ./crypto-config/ordererOrganizations/fabtest13.com/orderers/orderer.fabtest13.com/:/etc/hyperledger/crypto-config/orderer
+        - ./crypto-config/ordererOrganizations/fabtest13.com/orderers/orderer0.fabtest13.com/:/etc/hyperledger/crypto-config/orderer0
+        #- ./crypto-config/peerOrganizations/samsung1.fabtest13.com/peers/peer0.samsung1.fabtest13.com/:/etc/hyperledger/crypto-config/samsung1/peer0
+        #- ./crypto-config/peerOrganizations/hyundai2.fabtest13.com/peers/peer0.hyundai2.fabtest13.com/:/etc/hyperledger/crypto-config/hyundai2
     networks:
       - basic
 
@@ -36,24 +38,24 @@ services:
       - CORE_LOGGING_PEER=info
       - CORE_CHAINCODE_LOGGING_LEVEL=info
       - CORE_PEER_ID=peer0.samsung1.fabtest13.com
-      - CORE_PEER_ADDRESS=peer0.samsung1.fabtest13.com:7051
+      - CORE_PEER_ADDRESS=peer0.samsung1.fabtest13.com:17051
       - CORE_PEER_LOCALMSPID=SamsungMSP
-      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto-config/samsung1/msp
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto-config/samsung1/peer0/msp
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=net_basic
       - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
-      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb1:5984
+      - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb1:15984
       - CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME=
       - CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD=
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
-      - 7051:7051
-      - 7053:7053
+      - 17051:17051
+      - 17053:17053
     volumes:
         - /var/run/:/host/var/run/
         - ./configtx/:/etc/hyperledger/configtx
-        - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/peers/peer0.samsung1.fabtest13.com/:/etc/hyperledger/crypto-config/samsung1
-        - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/users:/etc/hyperledger/crypto-config/samsungusers
+        - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/peers/peer0.samsung1.fabtest13.com/:/etc/hyperledger/crypto-config/samsung1/peer0
+        - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/users/:/etc/hyperledger/crypto-config/samsung1/users
     depends_on:
       - orderer.fabtest13.com
       - couchdb1
@@ -67,6 +69,6 @@ services:
       - COUCHDB_USER=
       - COUCHDB_PASSWORD=
     ports:
-      - 5984:5984
+      - 15984:15984
     networks:
       - basic

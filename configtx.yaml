@@ -13,7 +13,7 @@ Organizations:
         MSPDir: crypto-config/peerOrganizations/samsung1.fabtest13.com/msp
         AnchorPeers:
             - Host: 172.21.106.163
-              Port: 7051
+              Port: 17051
 
     - &PeerOrg2
         Name: Hyundai
