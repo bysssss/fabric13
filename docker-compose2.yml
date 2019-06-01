@@ -40,7 +40,7 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ./configtx/:/etc/hyperledger/configtx
-	- ./crypto-config/peerOrganizations/samsung1.fabtest13.com/peers/peer0.samsung1.fabtest13.com/:/etc/hyperledger/crypto-config/samsung1/peer0
-	- ./crypto-config/peerOrganizations/samsung1.fabtest13.com/users/:/etc/hyperledger/crypto-config/samsung1/users
+        - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/peers/peer0.samsung1.fabtest13.com/:/etc/hyperledger/crypto-config/samsung1/peer0
+        - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/users/:/etc/hyperledger/crypto-config/samsung1/users
     networks:
         - basic
