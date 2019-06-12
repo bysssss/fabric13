@@ -47,3 +47,25 @@ services:
       - 5984:5984
     networks:
       - basic
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_LOGGING_LEVEL=info
+      - CORE_PEER_ID=cli
+      - CORE_PEER_LOCALMSPID=SamsungMSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto-config/samsung1/users/Admin@samsung1.fabtest13.com/msp
+      - CORE_CHAINCODE_KEEPALIVE=10
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./configtx/:/etc/hyperledger/configtx
+        - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/peers/peer0.samsung1.fabtest13.com/:/etc/hyperledger/crypto-config/samsung1/peer0
+        - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/users/:/etc/hyperledger/crypto-config/samsung1/users
+    networks:
+        - basic
