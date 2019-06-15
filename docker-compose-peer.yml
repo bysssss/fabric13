@@ -96,6 +96,7 @@ services:
       - CORE_PEER_LOCALMSPID=SamsungMSP
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto-config/samsung1/users/Admin@samsung1.fabtest13.com/msp
       - CORE_CHAINCODE_KEEPALIVE=10
+      - CORE_CHAINCODE_LOGGING_LEVEL=debug
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: /bin/bash
     volumes:
