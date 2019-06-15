@@ -101,6 +101,7 @@ services:
     volumes:
         - /var/run/:/host/var/run/
         - ./configtx/:/etc/hyperledger/configtx
+        - ./chaincode/:/etc/hyperledger/chaincode
         - ./crypto-config/peerOrganizations/samsung1.fabtest13.com/users/:/etc/hyperledger/crypto-config/samsung1/users
     networks:
         - basic
